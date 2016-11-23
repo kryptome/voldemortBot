@@ -1,0 +1,7 @@
+{
+  "name": "voldemort",
+  "main": "server.js",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.23.3"
+  }
+}
