@@ -1,8 +1,10 @@
 var token = '296649568:AAFTfr1wsPZCm0Z-N2eQSEFR-Wj9r3bJtJA';
-var token2='275910306:AAEDOsceNmtMxI-ZT0TrCBuNXjrwHaNGVHE';
+var token2 = '275910306:AAEDOsceNmtMxI-ZT0TrCBuNXjrwHaNGVHE';
 var Telegram = require('node-telegram-bot-api');
 var fs = require('fs');
-
+var config = require('./config');
+var express = require('express');
+var app = express();
 bot = new Telegram(token, {
     polling: true
 });
@@ -12,7 +14,7 @@ console.log("Bot working on destruction");
 
 bot.getMe().then(function (me) {
     console.log(me.username);
-    console.log(me.id);     
+    console.log(me.id);
     console.log(me.first_name);
     console.log(me.last_name);
 
@@ -178,28 +180,30 @@ bot.onText(/[^(exit|hey|let's play|so|help|hey|hi|telegram|whatsapp|hike|what's 
 })
 
 
-bot.onText(/\/forward (.+)/i,function(msg,match){
-    forward=match[1];
-    bot.sendMessage(252636937,"The Forwaded Message is as follow :\n"+forward);
-    bot.sendMessage(-153199017,"The Forwaded Message is as follow :\n"+forward);
-    
+bot.onText(/\/forward (.+)/i, function (msg, match) {
+    forward = match[1];
+    bot.sendMessage(252636937, "The Forwaded Message is as follow :\n" + forward);
+    bot.sendMessage(-153199017, "The Forwaded Message is as follow :\n" + forward);
+
 })
 
 
 
-bot.on('message',function(msg){
+bot.on('message', function (msg) {
     console.log(msg.chat.id);
-    if(msg.hasOwnProperty('voice')){
+    if (msg.hasOwnProperty('voice')) {
         console.log("inside");
-    bot.sendVoice(-1001077627138,msg.voice.file_id);
+        bot.sendVoice(-1001077627138, msg.voice.file_id);
     }
-if(msg.chat.id<0)
-{
-    console.log("group contacted");
-}else{
-    console.log("Person has contacted");
-}
+    if (msg.chat.id < 0) {
+        console.log("group contacted");
+    } else {
+        console.log("Person has contacted");
+    }
 })
+app.listen(config.port, function () {
+    console.log('Server listening on port ' + config.port);
+});
 
 /*
 bot.on('message',function(msg){
