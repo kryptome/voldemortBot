@@ -8,7 +8,7 @@ var inkFile = fs.readFileSync('./intercept.json', 'UTF-8').replace(/^\uFEFF/, ''
 
 //create a new story
 var myStory = new Story(inkFile);
-var bot = new telegramBot("296649568:AAFTfr1wsPZCm0Z-N2eQSEFR-Wj9r3bJtJA", {
+var bot = new telegramBot("XXXTOKENXXXX", {
 	polling: true
 });
 
